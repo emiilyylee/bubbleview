@@ -9,12 +9,10 @@
   <meta property="og:title" content="BubbleView: replacing eye-tracking to crowdsource image importance">
   <meta property="og:description" content="An alternative methodology for tracking human visual attention using mouse clicks.">
   <meta property="og:image" content="https://namwkim.github.io/bubbleview/img/share.png">
-  <meta property="og:url" content="http://massvis.mit.edu/bubbleview">
+  <meta property="og:url" content="Figure">
 
-  <meta itemprop="name" content="BubbleView: replacing eye-tracking to crowdsource image importance">
-  <meta itemprop="description" content="An alternative methodology for tracking human visual attention using mouse clicks.">
-  <meta itemprop="image" content="https://namwkim.github.io/bubbleview/img/share.png">
-
+  
+  
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@HarvardVCG">
   <meta name="twitter:title" content="BubbleView: replacing eye-tracking to crowdsource image importance">
@@ -22,8 +20,6 @@
   <meta name="twitter:creator" content="@namwkim85">
   <!-- Twitter summary card with large image must be at least 280x150px -->
   <meta name="twitter:image:src" content="https://namwkim.github.io/bubbleview/img/share.png">
-
-  <meta name="author" content="Nam Wook Kim and Zoya Bylinskii">
 
   <title>BubbleView</title>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -35,118 +31,50 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/png" href="img/logo2.png"/>
+
+  <!-- fixing the layout of the image -->
   <style>
-    body {
-      padding-top: 70px;
+    * { 
+      padding: 0;
+      margin: 0;
+    }
+    .imgbox {  /* relative to picture size */
+      display: grid;
+      height: 100%;
+    }
+    .center-fit {
+      max-width: 100%;
+      max-height: 100vh;
+      margin: auto;
     }
   </style>
-
 </head>
 
 <body>
-
-  <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">
-          <span><img alt="Brand" src="img/logo.png" width="30"></span> &nbsp;<strong>BubbleView</strong>
-        </a>
-      </div>
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav navbar-right">
-
-          <li><a href="#demo">Demo</a></li>
-          <li><a href="#code">Code</a></li>
-          <li><a href="#data">Data</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
   <div class="container-fluid">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h2>BubbleView: an interface for crowdsourcing image importance maps and tracking visual attention</h2>
-        <br>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-
-              <img class="img-circle img-responsive center-block" src="img/people/nam2.png"> <a href="http://www.namwkim.org" target="_blank">NamWook
-              <br>Kim<strong>*</strong></a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/zoya2.png"> <a href="http://web.mit.edu/zoya/www/" target="_blank">Zoya
-              <br>Bylinskii<strong>*</strong></a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/michelle2.png"> <a href="http://people.seas.harvard.edu/~borkin/" target="_blank">Michelle
-              <br>Borkin</a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/gajos2.png"> <a href="http://www.eecs.harvard.edu/~kgajos/" target="_blank">Krzysztof
-              <br>Gajos</a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/aude2.png"> <a href="http://cvcl.mit.edu/audeoliva.html" target="_blank">Aude
-              <br>Oliva</a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/fredo2.png"> <a href="http://people.csail.mit.edu/fredo/" target="_blank">Fredo
-              <br>Durand</a>
-            </div>
-            <div class="col-xs-4 col-sm-2 col-md-1 text-center">
-              <img class="img-circle img-responsive center-block" src="img/people/hp2.png"> <a href="http://vcg.seas.harvard.edu/people/hanspeter-pfister" target="_blank">Hanspeter
-              <br>Pfister</a>
-            </div>
-          </div>
-        </div>
-
-        <br>
-        <p>In this paper, we present BubbleView, an alternative methodology for eye tracking using discrete mouse clicks to measure which information people consciously choose to examine. BubbleView is a mouse-contingent, moving-window interface in which participants are presented with a series of blurred images and click to reveal "bubbles" - small, circular areas of the image at original resolution, similar to having a confined area of focus like the eye fovea. Across 10 experiments with 28 different parameter combinations, we evaluated BubbleView on a variety of image types: information visualizations, natural images, static webpages, and graphic designs, and compared the clicks to eye fixations collected with eye-trackers in controlled lab settings. We found that BubbleView clicks can both (i) successfully approximate eye fixations on different images, and (ii) be used to rank image and design elements by importance. BubbleView is designed to collect clicks on static images, and works best for defined tasks such as describing the content of an information visualization or measuring image importance. BubbleView data is cleaner and more consistent than related methodologies that use continuous mouse movements.
-Our analyses validate the use of mouse-contingent, moving-window methodologies as approximating eye fixations for different image and task types.
-        </p>
-        <br>
-        <p>
-          <br> <strong>*Equal contribution</strong>
-        </p>
-
-        <a href="file/paper.pdf" target="_blank" class="btn btn-raised btn-default btn-sm">PDF</a>
-        <a href="file/supplement.pdf" target="_blank" class="btn btn-raised btn-default btn-sm">Supplement</a>
-        <a href="file/slides.pdf" target="_blank" class="btn btn-raised btn-default btn-sm">Slides</a>
-        <a data-toggle="modal" data-target="#bibtex-dialog" class="btn btn-raised btn-default btn-sm">Bibtex</a>
-        <a href="file/addendum.pdf" target="_blank" class="btn btn-raised btn-default btn-sm">Addendum</a>
-        
-
-        <br>
-        <h4>Acknowledgement</h4>
-        <p>This work has been made possible through support from Google, Xerox, the NSF Graduate Research Fellowship Program, the Natural Sciences and Engineering Research Council of Canada, and the Kwanjeong Educational Foundation. We also acknowledge the support of the Toyota Research Institute / MIT CSAIL Joint Research Center.</p>
-
-      </div>
-    </div>
-    <div id="demo" class="panel panel-default">
-      <div class="panel-body">
-        <h2>Live Demo</h2>
-        <p>
-          1. Choose an image and a parameter setting (bubble radius and blur radius)<br>
-          2. Click and describe the image in the BubbleView interface. <br>
-          3. Click 'Next' to see the bubbles generated in the monitoring interface. <br>
-        </p>
-        <br>
-        <h4>Select a Sample Image</h4>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample1.png')">Sample 1</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample2.png')">Sample 2</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample3.jpg')">Sample 3</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample4.jpg')">Sample 4</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample5.png')">Sample 5</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample6.png')">Sample 6</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample7.jpg')">Sample 7</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/sample8.jpg')">Sample 8</buttom>
+    <!-- <div class="imgbox">
+       <img class = "center-fit"> -->
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure1.png')">Figure 1</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure2.png')">Figure 2</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure3.png')">Figure 3</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure4.png')">Figure 4</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure5.png')">Figure 5</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure6.png')">Figure 6</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure7.png')">Figure 7</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure8.png')">Figure 8</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure9.png')">Figure 9</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure10.png')">Figure 10</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure1.png')">Figure 11</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure2.png')">Figure 12</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure3.png')">Figure 13</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure4.png')">Figure 14</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure5.png')">Figure 15</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure6.png')">Figure 16</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure7.png')">Figure 17</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure8.png')">Figure 18</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure9.png')">Figure 19</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure10.png')">Figure 20</buttom>
+        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure11.png')">Figure 21</buttom>
         <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">BubbleView Interface</h3>
@@ -261,71 +189,6 @@ Our analyses validate the use of mouse-contingent, moving-window methodologies a
 
       </div>
     </div>
-    <div id="code" class="panel panel-default">
-      <div class="panel-body">
-        <h2>Code</h2>
-        <p>The source code used in this demo is available at <strong><a href="https://github.com/namwkim/bubbleview" target="_blank">github.com/namwkim/bubbleview</a></strong>.
-        It mainly consists of two components: 1) setting up a bubbleview interface on a HTML canvas and 2) displaying collected bubbles in temporal order.
-        A use case demonstrating how to use the code is shown in this webpage; please take a look at the source code of this page.<br><br>
-
-        The code for running our experiments on Amazon's Mechanical Turk is outdated. We recommend taking a loot at the <a href="https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html" target="_blank">MTurk documentation</a>.
-        If you are interested in progammatically launching experiments, please refer to Amazon's SDK (e.g, <a href="https://aws.amazon.com/sdk-for-python/" target="_blank">Python</a>, <a href="https://aws.amazon.com/sdk-for-node-js/" target="_blank">Javascript</a>).  
-        
-        </p>
-
-      </div>
-    </div>
-    <div id="data" class="panel panel-default">
-        <div class="panel-body">
-          <h2>Data</h2>
-          <p>All the data and analysis codes used in BubbleView experiments are available at <strong><a href="https://github.com/cvzoya/bubbleview" target="_blank">github.com/cvzoya/bubbleview</a></strong>. You will find detailed information there.
-          </p>  
-        </div>
-      </div>
-    <div id="contact" class="panel panel-default">
-      <div class="panel-body">
-        <h2>Contact</h2>
-        <h4>Questions?</h4>
-        <p>Please send inquires to <a href="mailto:massvis@mit.edu">massvis@mit.edu</a></p>
-        <br>
-        <h4>Comments?</h4>
-        <div id="disqus_thread"></div>
-      </div>
-    </div>
-  </div>
-  <div id="bibtex-dialog" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">Bibtex</h4>
-        </div>
-        <div class="modal-body">
-          <p>
-              @article{kim2017bubbleview,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;title={BubbleView: an interface for crowdsourcing image importance maps and tracking visual attention},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;author={Kim, Nam Wook and Bylinskii, Zoya and Borkin, Michelle A and Gajos, Krzysztof Z and Oliva, Aude and Durand, Fredo and Pfister, Hanspeter},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;journal={ACM Transactions on Computer-Human Interaction (TOCHI)},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;volume={24},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;number={5},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;pages={36},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;year={2017},<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;publisher={ACM}<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;doi={10.1145/3131275}<br>
-              }
-            <!-- @misc{1702.05150,<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Author = {Nam Wook Kim and Zoya Bylinskii and Michelle A. Borkin and Krzysztof Z. Gajos and Aude Oliva and Fredo Durand and Hanspeter Pfister},<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Title = {BubbleView: an interface for crowdsourcing image importance maps and tracking visual attention},<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Year = {2017},<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Eprint = {arXiv:1702.05150},<br>
-              } -->
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -344,7 +207,7 @@ Our analyses validate the use of mouse-contingent, moving-window methodologies a
     var originalDesc, updatedDesc;
     var slider;
     var seeBubbles, seeOriginal;
-    var curimg = 'img/sample1.png';
+    var curimg = 'img/AR5figure1.png';
 
     function logClick(log) {
       clickCount++;
@@ -386,6 +249,7 @@ Our analyses validate the use of mouse-contingent, moving-window methodologies a
     }
     function onChangeImage(imgPath){
       curimg = imgPath;
+      // console.log(imgPath);
       resetBubbleView();
     }
 
@@ -565,7 +429,6 @@ Our analyses validate the use of mouse-contingent, moving-window methodologies a
   (d.head || d.body).appendChild(s);
   })();
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </body>
 
