@@ -337,7 +337,7 @@
     var timer = null;
     function resizeCanvas(canvasID, containerID){
       var newWidth = $('#'+containerID).width();
-      if (newWidth>500){
+      if (newWidth>500 && newWidth<500){
         newWidth = 500;
       }
       var canvas = document.getElementById(canvasID);
