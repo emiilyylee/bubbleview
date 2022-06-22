@@ -76,67 +76,30 @@
         <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure10.png')">Figure 20</buttom>
         <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure11.png')">Figure 21</buttom>
         <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">BubbleView Interface</h3>
-          </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-2">
-                <label>Bubble Radius</label>
-              </div>
               <div class="col-md-10">
-                <form name='radiusForm'>
+                <form name='radiusForm'></form>
                   <label class="radio-inline">
-                    <input type="radio" name="radius" value="30" checked> 30
+                    <!-- statically setting the radius of the bubble (30 pix) and the blur kernel (40 pix)-->
+                    <br></br>
+                    <input type = "radio" name = "blur" value = "40" checked>
+                    <input type= "radio" name= "radius" value= "45" checked>
                   </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="radius" value="40"> 40
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="radius" value="50"> 50
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="radius" value="60"> 60
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="radius" value="70"> 70
-                  </label>
+                  
                 </form>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-md-2">
-                <label>Blur Radius</label>
-              </div>
-              <div class="col-md-10">
-                <form name='blurForm'>
-                  <label class="radio-inline">
-                    <input type="radio" name="blur" value="30" checked> 30
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="blur" value="40"> 40
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="blur" value="50"> 50
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="blur" value="60"> 60
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="blur" value="70"> 70
-                  </label>
-                </form>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="canvas-container">
+              <div class="col-md-7" id="canvas-container">
                 <canvas id="canvas" width="500" height="500"></canvas>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <form>
                   <span class="badge"><span id="click-count">0</span> clicks</span>
                   <span class="badge"><span id="char-count">0</span> characters</span>
-                  <div class="form-group label-floating" style="padding:0px;">
+                  <div class="float:right;" style="padding:0px;">
                     <label for="desc" class="control-label">Describe the image in as much detail as possible...</label>
                     <textarea id="desc" name="desc" class="form-control" rows="17"></textarea>
                   </div>
@@ -331,8 +294,8 @@
     }
     // responsive canvas
     var size = {};
-    var canvasWidth = 500;
-    var canvasHeight = 500;
+    var canvasWidth;
+    var canvasHeight;
     var windowWidth, windowHeight;
     var timer = null;
     function resizeCanvas(canvasID, containerID){
