@@ -6,155 +6,149 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="BubbleView: replacing eye-tracking to crowdsource image importance">
-  <meta property="og:description" content="An alternative methodology for tracking human visual attention using mouse clicks.">
-  <meta property="og:image" content="https://namwkim.github.io/bubbleview/img/share.png">
   <meta property="og:url" content="Figure">
 
-  
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@HarvardVCG">
-  <meta name="twitter:title" content="BubbleView: replacing eye-tracking to crowdsource image importance">
-  <meta name="twitter:description" content="An alternative methodology for tracking human visual attention using mouse clicks.">
-  <meta name="twitter:creator" content="@namwkim85">
-  <!-- Twitter summary card with large image must be at least 280x150px -->
-  <meta name="twitter:image:src" content="https://namwkim.github.io/bubbleview/img/share.png">
 
-  <title>BubbleView</title>
+  <!-- stylesheets -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/png" href="img/logo2.png"/>
-
-  <!-- fixing the layout of the image -->
-  <style>
-    * { 
-      padding: 0;
-      margin: 0;
-    }
-    .imgbox {  /* relative to picture size */
-      display: grid;
-      height: 100%;
-    }
-    .center-fit {
-      max-width: 100%;
-      max-height: 100vh;
-      margin: auto;
-    }
-  </style>
 </head>
 
 <body>
   <div class="container-fluid">
-    <!-- <div class="imgbox">
-       <img class = "center-fit"> -->
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure1.png')">Figure 1</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure2.png')">Figure 2</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure3.png')">Figure 3</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure4.png')">Figure 4</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure5.png')">Figure 5</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure6.png')">Figure 6</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure7.png')">Figure 7</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure8.png')">Figure 8</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure9.png')">Figure 9</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure10.png')">Figure 10</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure1.png')">Figure 11</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure2.png')">Figure 12</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure3.png')">Figure 13</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure4.png')">Figure 14</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure5.png')">Figure 15</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure6.png')">Figure 16</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure7.png')">Figure 17</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure8.png')">Figure 18</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure9.png')">Figure 19</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure10.png')">Figure 20</buttom>
-        <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure11.png')">Figure 21</buttom>
-        <div class="panel panel-info">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-10">
-                <form name='radiusForm'></form>
-                  <label class="radio-inline">
-                    <!-- statically setting the radius of the bubble (30 pix) and the blur kernel (40 pix)-->
-                    <br></br>
-                    <input type = "radio" name = "blur" value = "40" checked>
-                    <input type= "radio" name= "radius" value= "45" checked>
-                  </label>
-                  
-                </form>
-              </div>
-            </div>
+    <!-- buttons for the figures -->
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure1.png')">Figure 1</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure2.png')">Figure 2</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure3.png')">Figure 3</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure4.png')">Figure 4</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure5.png')">Figure 5</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure6.png')">Figure 6</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure7.png')">Figure 7</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure8.png')">Figure 8</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure9.png')">Figure 9</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure10.png')">Figure 10</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure1.png')">Figure 11</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure2.png')">Figure 12</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure3.png')">Figure 13</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure4.png')">Figure 14</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure5.png')">Figure 15</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure6.png')">Figure 16</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure7.png')">Figure 17</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure8.png')">Figure 18</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure9.png')">Figure 19</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure10.png')">Figure 20</buttom>
+    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure11.png')">Figure 21</buttom>
 
-            <div class="row">
-              <div class="col-md-7" id="canvas-container">
-                <canvas id="canvas" width="500" height="500"></canvas>
-              </div>
-              <div class="col-md-3">
-                <form>
-                  <span class="badge"><span id="click-count">0</span> clicks</span>
-                  <span class="badge"><span id="char-count">0</span> characters</span>
-                  <div class="float:right;" style="padding:0px;">
-                    <label for="desc" class="control-label">Describe the image in as much detail as possible...</label>
-                    <textarea id="desc" name="desc" class="form-control" rows="17"></textarea>
-                  </div>
-                </form>
-                <a href="#monitoring" class="btn btn-success btn-block" style="margin:0px;">
-                  Next
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="monitoring" class="panel panel-success" style="margin-top:100px;">
-          <div class="panel-heading">
-            <h3 class="panel-title">Monitoring Interface</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-                <div class="togglebutton">
-                  <label>
-                    <input id="see-original" type="checkbox"> See Original
-                  </label>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-                <div class="togglebutton">
-                  <label>
-                    <input id="see-bubbles" type="checkbox" checked> See Bubbles
-                  </label>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                <label> Time Slider (<span id="curr-bubbles">0</span>/<span id="total-bubbles">0</span>)</label>
-                <div id="slider" style="margin-top:0px;" class="slider shor slider-material-orange"></div>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="result-canvas-container">
-                <canvas id="result-canvas" width="500" height="500"></canvas>
-              </div>
-              <div class="col-md-4">
-                <label>Description Change:</label>
-                <p id="result-desc">
-                </p>
-              </div>
-            </div>
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <!-- panel creation for radio buttons for blur kernel and bubble radius -->
+        <div class="row">
+          <div class="col-md-10">
+            <form name='radiusForm'></form>
+            <label class="radio-inline">
+              <!-- statically setting the radius of the bubble (30 pix) and the blur kernel (40 pix)-->
+              <br></br>
+              <input type="radio" name="blur" value="40" checked>
+              <input type="radio" name="radius" value="45" checked>
+            </label>
+            </form>
           </div>
         </div>
 
+        <!-- creating a canvas that the image will be on, making it 500x500 -->
+        <div class="row">
+          <!-- ** change the col # to change how much room the canvas takes up -->
+          <div class="col-md-9" style="padding: 0 10px; margin-right: 0px; float: right;" id="canvas-container">
+            <!-- makes the canvas for the whole space-- the white part?? -->
+            <canvas id="canvas" width="500" height="500"></canvas>
+          </div>
+
+          <!-- creating a counter for both the clicks and the characters -->
+          <div class="col-md-2">
+            <form>
+              <span class="badge"><span id="click-count">0</span> clicks</span>
+              <span class="badge"><span id="char-count">0</span> characters</span>
+
+              <!-- creating and formatting the description box on the right-- want the margin on the right to be as small as possible
+                  ** should we keep this description box?? ** -->
+              <div class="form-group label-floating" style="padding:0px;">
+                <label for="desc" class="control-label">Describe the image in as much detail as possible...</label>
+
+                <!-- the format for the textbox itself -->
+                <textarea id="desc" name="desc" class="form-control" rows="20"></textarea>
+              </div>
+            </form>
+
+            <!-- making the "next" button that takes you to the monitoring interface -->
+            <a href="#monitoring" class="btn btn-success btn-block" style="margin:0px;">
+              Next
+            </a>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- the monitoring interface -->
+    <div id="monitoring" class="panel panel-success" style="margin-top:100px;">
+      <div class="panel-heading">
+        <h3 class="panel-title">Monitoring Interface</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+
+          <!-- creating the toggle button to see the original image -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+            <div class="togglebutton">
+              <label>
+                <input id="see-original" type="checkbox"> See Original
+              </label>
+            </div>
+          </div>
+
+          <!-- creating the toggle button to see the bubbles -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+            <div class="togglebutton">
+              <label>
+                <input id="see-bubbles" type="checkbox" checked> See Bubbles
+              </label>
+            </div>
+          </div>
+
+          <!-- creating a slider for the time series -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <label> Time Slider (<span id="curr-bubbles">0</span>/<span id="total-bubbles">0</span>)</label>
+            <div id="slider" style="margin-top:0px;" class="slider shor slider-material-orange"></div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- making the coordinate map for the bubbles -->
+          <div class="col-md-9" id="result-canvas-container">
+            <canvas id="result-canvas" width="500" height="500"></canvas>
+          </div>
+
+          <!-- showing the change in the description -->
+          <div class="col-md-3">
+            <label>Description Change:</label>
+            <p id="result-desc">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
   <script src="js/ripples.min.js"></script>
   <script src="js/nouislider.min.js"></script>
   <script src="js/material.min.js"></script>
@@ -163,15 +157,21 @@
   <script src="js/bubbleview.js"></script>
 
   <script>
-    var radius, blur;
-    var clickCount = 0;
-    var clicks = [];
-    var descs = [];
-    var originalDesc, updatedDesc;
-    var slider;
-    var seeBubbles, seeOriginal;
-    var curimg = 'img/AR5figure1.png';
+    var radius, blur;                       /* variables to hold the radius size and the blur kernel*/
+    var clickCount = 0;                     /* keeping count of the number of clicks on the canvas */
+    var clicks = [];                        /* keeping track of the positions (?) of the clicks -- coordinates (?) */
+    var descs = [];                         /* keeping track of the descriptions -- storing them in a list/arr */
+    var originalDesc, updatedDesc;          /* vars for the original and updated decriptions */
+    var slider;                             /* var for the time slider -- keeping track of the order */
+    var seeBubbles, seeOriginal;            /* toggle controls to view the original image or bubble map*/
+    var curimg = 'img/AR5figure1.png';      /* default image */
 
+
+    /* logClick:
+       keeps track of the clicks that are made on the canvas, pushes the position 
+       to the array called "clicks". also calls to the reset monitoring function
+       input: log-- position of the click
+    */
     function logClick(log) {
       clickCount++;
       $("#click-count").text(clickCount);
@@ -180,11 +180,21 @@
 
       resetMonitoring();
     }
+
+    /* focusInDesc:
+       focusing in on the descriptions, updates the value of the original description 
+       to be what has been typed in the description box
+    */
     function focusInDesc() {
       // console.log("in focus");
       originalDesc = $("#desc").val();
     }
 
+    /* focusOutDesc:
+       storing the current value of the description as the the updated value, checks 
+       if this description is different from the last one, then makes this a "current one"
+       by saying it is from right now. also calls to resetMonitoring.
+    */
     function focusOutDesc() {
       // console.log("out focus");
       updatedDesc = $("#desc").val();
@@ -197,47 +207,71 @@
       resetMonitoring();
     }
 
+    /* onSliderChange:
+       calls to updateMonitoring which should change the slider
+       inputs: value and handle
+    */
     function onSliderChange(value, handle) {
       updateMonitoring();
     }
 
+    /* onCheckSeeBubbles:
+       "checks" the toggle that says that we want to see the bubbles and then 
+       calls on updateMonitoring.
+    */
     function onCheckSeeBubbles() {
       seeBubbles = this.checked;
       updateMonitoring();
     }
 
+    /* onCheckSeeOriginal:
+       "checks" the toggle that says that we want to see the original (unblurred image)
+       and then calls on updateMonitoring.
+    */
     function onCheckSeeOriginal() {
       seeOriginal = this.checked;
       updateMonitoring();
     }
-    function onChangeImage(imgPath){
+
+    /* onChangeImage:
+       changes the image by replacing the old curimg with the imgPath
+       input: imgPath
+    */
+    function onChangeImage(imgPath) {
       curimg = imgPath;
       // console.log(imgPath);
       resetBubbleView();
     }
 
+    /* resetBubbleView:
+       just resetting the interface, setting the variables to 0 or empty
+    */
     function resetBubbleView() {
-      //  reset bubbleview interface
+      // reset bubbleview interface
       bv.setup(curimg, 'canvas', radius, blur, logClick);
       $("#desc").val('');
       $('#char-count').text(0);
       $("#click-count").text(0);
       clicks = [];
       descs = [];
-
       clickCount = 0;
       resetMonitoring();
     }
 
+    /* updateMonitoring:
+       updates the view of the monitoring interface
+    */
     function updateMonitoring() {
       // console.log('update monitoring')
-        //update bubbles
+
+      // update bubbles
       var filteredCnt = bv.monitor(curimg, 'result-canvas', radius, blur,
         seeBubbles, seeOriginal, clicks, parseInt($('#slider').val()));
 
-      //update description
+      // update description
       var maxTime = parseInt($('#slider').val())
-      var desc = null; //$scope.desc;
+      var desc = null; // $scope.desc;
+
       for (var i = 0; i < descs.length; i++) {
         var time = parseInt(descs[i].timestamp);
         if (time <= maxTime) { // find the last description
@@ -246,7 +280,7 @@
       }
       $('#result-desc').empty();
       if (desc != null) {
-        desc['diff'].forEach(function(part) {
+        desc['diff'].forEach(function (part) {
           // green for additions, red for deletions
           // grey for common parts
           var color = part.added ? 'green' :
@@ -262,6 +296,9 @@
       $("#total-bubbles").text(clickCount);
     }
 
+    /* resetMonitoring:
+       resets the monitoring interface
+    */
     function resetMonitoring(maxTime) {
       //  reset monitoring interface
       //  reset slider
@@ -275,9 +312,9 @@
           }
         }, true);
       } else {
-        var times = clicks.concat(descs).sort(function(a, b) {
+        var times = clicks.concat(descs).sort(function (a, b) {
           return a.timestamp - b.timestamp;
-        }).map(function(d) {
+        }).map(function (d) {
           return d.timestamp;
         });
 
@@ -298,26 +335,30 @@
     var canvasHeight;
     var windowWidth, windowHeight;
     var timer = null;
-    function resizeCanvas(canvasID, containerID){
-      var newWidth = $('#'+containerID).width();
-      if (newWidth>500 && newWidth<500){
+    function resizeCanvas(canvasID, containerID) {
+      var newWidth = $('#' + containerID).width();
+      if (newWidth > 500 && newWidth < 500) {
         newWidth = 500;
       }
       var canvas = document.getElementById(canvasID);
       canvas.width = parseInt(newWidth);
       canvas.height = parseInt(newWidth);
     }
-    function resized(){
+
+
+    function resized() {
       resizeCanvas('canvas', 'canvas-container');
       resizeCanvas('result-canvas', 'result-canvas-container');
       resetBubbleView();
     }
-    $( window ).resize(function() {
+
+    $(window).resize(function () {
       clearTimeout(timer);
       timer = setTimeout(resized, 100);
 
     });
-    $(document).ready(function() {
+
+    $(document).ready(function () {
       $.material.init();
       $('[data-toggle="popover"]').popover();
 
@@ -344,7 +385,7 @@
 
       var radiBtns = document.radiusForm.radius;
       for (var i = 0; i < radiBtns.length; i++) {
-        radiBtns[i].onclick = function() {
+        radiBtns[i].onclick = function () {
           radius = parseInt(this.value);
           resetBubbleView();
         }
@@ -352,13 +393,13 @@
       var blurBtns = document.blurForm.blur;
 
       for (var i = 0; i < blurBtns.length; i++) {
-        blurBtns[i].onclick = function() {
+        blurBtns[i].onclick = function () {
           blur = parseInt(this.value);
           resetBubbleView();
         }
       }
       // description change tracking
-      $('#desc').keyup(function() {
+      $('#desc').keyup(function () {
         $('#char-count').text($('#desc').val().length);
       })
 
@@ -376,21 +417,21 @@
 
   <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = '//bubbleview.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//bubbleview.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
   </script>
 
 </body>
