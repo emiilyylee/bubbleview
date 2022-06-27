@@ -1,13 +1,18 @@
 var bv = (function() {
-  var _bubbleR = 30;
-  var _blurR = 30;
+  // static vars ** change if changed in index.html
+  var _bubbleR = 40;
+  var _blurR = 45;
   var VIEW_TIME = 10;
   var userTask = null;
   var image = null;
   var canvas = null;
 
+  /* CalcNewImageSize
+     calculates the image size according to the ratio of the canvas' dimensions
+  */
   function CalcNewImageSize(imgWidth, imgHeight, canvasWidth, canvasHeight) {
-    var ratio = Math.min(canvasWidth / imgWidth, canvasHeight / imgHeight); //Math.min(, 1.0);
+    // calculate the ratio (how much of the canvas is the image taking up)
+    var ratio = Math.min(canvasWidth / imgWidth, canvasHeight / imgHeight);
     if (ratio > 1.0) {
       ratio = 1.0;
     }
@@ -17,6 +22,9 @@ var bv = (function() {
     };
   }
 
+  /* DrawRoundRect
+     drawing the bubble
+  */
   function DrawRoundRect(ctx, x, y, width, height, radius, fill, stroke) {
     if (typeof stroke == "undefined") {
       stroke = true;
@@ -43,6 +51,10 @@ var bv = (function() {
     }
   }
 
+  /* OnClickDrawMask
+     for when you click a spot on the canvas, it unblurs. if you had clicked on
+     a spot before then, it reblurs that spot
+  */
   function OnClickDrawMask(e) {
     var ctx = canvas.getContext('2d');
 
@@ -86,6 +98,12 @@ var bv = (function() {
     }
 
   }
+
+  /* blurImage
+     a function that creates a blurred version of the image (how blurry 
+     depends on the alpha channel)
+     returns: the blurred image (temp)
+  */
   function blurImage(img, radius, blurAlphaChannel) {
     var w = img.naturalWidth;
     var h = img.naturalHeight;
@@ -109,6 +127,13 @@ var bv = (function() {
 
       return temp;
   }
+
+  /* setup
+     sets up the background/canvas image
+     inputs: imgUrl (the file path), canvasID (usually canvas-container),
+             bubbleR (the bubble radius), blurR (the blur sigma), task (
+             if the user is doing a task)
+  */
   function setup(imgUrl, canvasID, bubbleR, blurR, task) {
     userTask = task;
     canvas = document.getElementById(canvasID);
@@ -138,7 +163,7 @@ var bv = (function() {
   }
 
 
-  // assume that the task was completed  at least within an hour.
+  // assume that the task was completed at least within an hour.
   function monitor(imgUrl, canvasID, bubbleR, blurR, seeBubbles, seeOriginal,
     clicks, maxTime) {
     var canvas = document.getElementById(canvasID); // not using global variable

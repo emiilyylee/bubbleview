@@ -52,8 +52,10 @@
           <div class="col-md-10">
             <form name='radiusForm'></form>
             <label class="radio-inline">
-              <!-- statically setting the radius of the bubble (30 pix) and the blur kernel (40 pix)-->
+              <!-- statically setting the radius of the bubble (40 pix) and the blur kernel (45 pix)-->
               <br></br>
+
+              <!-- ********************************************************** -->
               <input type="radio" name="blur" value="40" checked>
               <input type="radio" name="radius" value="45" checked>
             </label>
@@ -177,6 +179,11 @@
       $("#click-count").text(clickCount);
       // console.log(log);
       clicks.push(log);
+
+      console.log(clickCount);
+      // console.log(clicks[0].cx);
+      console.log(clicks);
+      
 
       resetMonitoring();
     }

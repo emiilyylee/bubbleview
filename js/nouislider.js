@@ -1,4 +1,6 @@
-/*! nouislider - 9.1.0 - 2016-12-10 16:00:32 */
+/*! nouislider - 9.1.0 - 2016-12-10 16:00:32 
+lightweight range slider with multi-touch support
+*/
 
 (function (factory) {
 
