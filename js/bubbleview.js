@@ -245,12 +245,39 @@ var bv = (function() {
         prev_y = bubble.cy;
 
       }
+      
+      // // trying to save/ export this as a file
+      // const fs = require('./bubbleview.js');
+      // var file = fs.createWriteStream('./results');
+      // file.on('error', function(err) {
+      //   console.log('bruh howd it break again');
+      // });
+      // arr.forEach(function(v) {
+      //   file.write(v.join(', ') + '\n');
+      //   console.log('this shit kinda fyre');
+      // });
+      // file.end();
+      //   require("fs").writeFile(
+      //     somepath,
+      //     arr.map(function(v){ return v.join(', ') }).join('\n'),
+      //     function (err) {console.log(err ? 'Error :'+err : 'ok')}
+      //  );
+      // console.log(bubbles);
+      // console.log(cy);
+      // export function expArr() {
+      //   return clicks;
+      // }
+
+      console.log(clicks);
+
       ctx.restore();
 
     }
 
     image.src = imgUrl;
     return bubbles.length;
+
+
 
   }
   return { // public interface
