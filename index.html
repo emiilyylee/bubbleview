@@ -22,29 +22,6 @@
 
 <body>
   <div class="container-fluid">
-    <!-- buttons for the figures -->
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure1.png')">Figure 1</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure2.png')">Figure 2</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure3.png')">Figure 3</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure4.png')">Figure 4</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure5.png')">Figure 5</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure6.png')">Figure 6</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure7.png')">Figure 7</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure8.png')">Figure 8</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure9.png')">Figure 9</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR5figure10.png')">Figure 10</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure1.png')">Figure 11</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure2.png')">Figure 12</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure3.png')">Figure 13</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure4.png')">Figure 14</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure5.png')">Figure 15</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure6.png')">Figure 16</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure7.png')">Figure 17</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure8.png')">Figure 18</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure9.png')">Figure 19</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure10.png')">Figure 20</buttom>
-    <buttom class="btn btn-primary btn-sm" onclick="onChangeImage('img/AR6figure11.png')">Figure 21</buttom>
-
     <div class="panel panel-info">
       <div class="panel-body">
         <!-- panel creation for radio buttons for blur kernel and bubble radius -->
@@ -54,8 +31,6 @@
             <label class="radio-inline">
               <!-- statically setting the radius of the bubble (40 pix) and the blur kernel (45 pix)-->
               <br></br>
-
-              <!-- ********************************************************** -->
               <input type="radio" name="blur" value="40" checked>
               <input type="radio" name="radius" value="45" checked>
             </label>
@@ -88,7 +63,7 @@
             </form>
 
             <!-- making the "next" button that takes you to the monitoring interface -->
-            <a href="#monitoring" class="btn btn-success btn-block" style="margin:0px;">
+            <a class="btn btn-success btn-block" style="margin:0px;" onclick= 'DisplayRandImg();'>
               Next
             </a>
           </div>
@@ -168,6 +143,73 @@
     var seeBubbles, seeOriginal;            /* toggle controls to view the original image or bubble map*/
     var curimg = 'img/AR5figure1.png';      /* default image */
 
+    // variable storing the source of the images
+    var figsBox = [{
+      src: 'img/AR5figure1.png'}, {
+      src: 'img/AR5figure2.png'}, {
+      src: 'img/AR5figure3.png'}, {
+      src: 'img/AR5figure4.png'}, {
+      src: 'img/AR5figure5.png'}, {
+      src: 'img/AR5figure6.png'}, {
+      src: 'img/AR5figure7.png'}, {
+      src: 'img/AR5figure8.png'}, {
+      src: 'img/AR5figure9.png'}, {
+      src: 'img/AR5figure10.png'}, {
+      src: 'img/AR6figure1.png'}, {
+      src: 'img/AR6figure2.png'}, {
+      src: 'img/AR6figure3.png'}, {
+      src: 'img/AR6figure4.png'}, {
+      src: 'img/AR6figure5.png'}, {
+      src: 'img/AR6figure6.png'}, {
+      src: 'img/AR6figure7.png'}, {
+      src: 'img/AR6figure8.png'}, {
+      src: 'img/AR6figure9.png'}, {
+      src: 'img/AR6figure10.png'}, {
+      src: 'img/AR6figure11.png'
+    }];
+
+    var usedImgs = {};
+    var usedImgsCount = 0;
+    var numImg = 0;
+    console.log(numImg);
+
+    function getRandNum () {
+
+    }
+    /* DisplayRandImg();
+       display a random image from the stored figures
+    */
+    function DisplayRandImg() {
+      // if the image has not been used yet
+      if (!usedImgs[numImg]) {
+        // setting the new image path for curimg
+        onChangeImage(figsBox[numImg]);
+        console.log('the new random image path is: ' + figsBox[numImg]);
+        console.log('able to change the image path');
+
+        // should reset the view of the monitor -- calls setup
+        resetBubbleView();
+
+        console.log('able to reset the monitoring');
+        console.log(usedImgs[numImg]);
+
+        // saying that this image is already used, increase the count
+        usedImgs[numImg] = true;
+        usedImgsCount++;
+
+        if (usedImgsCount == figsBox.length) {
+          // if we've run through all of the figures, then reset the things
+          usedImgsCount = 0;
+          usedImgs = {};
+          return;
+        }
+      } else {
+        console.log('broken or has been called again bc repeating');
+        // if numImg has been repeated, then we should re-calculate the number and call again
+        numImg = Math.floor(Math.random() * (figsBox.length));
+        DisplayRandImg();
+      }
+    }
 
     /* logClick:
        keeps track of the clicks that are made on the canvas, pushes the position 

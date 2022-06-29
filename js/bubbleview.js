@@ -6,7 +6,7 @@ var bv = (function() {
   var userTask = null;
   var image = null;
   var canvas = null;
-
+  
   /* CalcNewImageSize
      calculates the image size according to the ratio of the canvas' dimensions
   */
@@ -159,7 +159,10 @@ var bv = (function() {
       var blurred = blurImage(image, _blurR);
       ctx.drawImage(blurred, 0, 0, newSize.width, newSize.height);
     }
+    console.log('the image that we want to shows url: ' + imgUrl);
     image.src = imgUrl;
+    console.log('the source url of the image-- should be same as above^:' + image.src);
+    console.log('image source == imgUrl: ' + (image.src == imgUrl));
   }
 
 
@@ -268,6 +271,10 @@ var bv = (function() {
       //   return clicks;
       // }
 
+      // certain # of clicks/fixations then change to another image (export it then)
+      // when click next figure (log current trial)
+
+
       console.log(clicks);
 
       ctx.restore();
@@ -285,3 +292,8 @@ var bv = (function() {
     monitor: monitor
   };
 })();
+
+// take out the figures button
+// when you hit the next button it randomizes the figures and picks another one
+// next button is faded out until you finish some # of clicks/fixations
+// can export as csv as json-- visualizing (see if you can plot the coordinates-- see if they match where the monitor says the same (could be screen coords use like opencv))
