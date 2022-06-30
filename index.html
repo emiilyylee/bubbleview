@@ -41,20 +41,20 @@
         <!-- creating a canvas that the image will be on, making it 500x500 -->
         <div class="row">
           <!-- ** change the col # to change how much room the canvas takes up -->
-          <div class="col-md-9" style="padding: 0 10px; margin-right: 0px; float: right;" id="canvas-container">
+          <div class="col-md-9" style="padding: 10px; float: right;" id="canvas-container">
             <!-- makes the canvas for the whole space-- the white part?? -->
-            <canvas id="canvas" width="500" height="500"></canvas>
+            <canvas id="canvas" width="500" height="500" style = "float: right; margin-right: 100px;"></canvas>
           </div>
 
           <!-- creating a counter for both the clicks and the characters -->
-          <div class="col-md-2">
+          <div class="col-md-3">
             <form>
               <span class="badge"><span id="click-count">0</span> clicks</span>
               <span class="badge"><span id="char-count">0</span> characters</span>
 
               <!-- creating and formatting the description box on the right-- want the margin on the right to be as small as possible
                   ** should we keep this description box?? ** -->
-              <div class="form-group label-floating" style="padding:0px;">
+              <div class="form-group label-floating" style="padding: 0px;">
                 <label for="desc" class="control-label">Describe the image in as much detail as possible...</label>
 
                 <!-- the format for the textbox itself -->
@@ -142,6 +142,7 @@
     var slider;                             /* var for the time slider -- keeping track of the order */
     var seeBubbles, seeOriginal;            /* toggle controls to view the original image or bubble map*/
     var curimg = 'img/startImg.png';        /* default image */
+    var endimg = 'img/endImg.png';
 
     // variable storing the source of the images
     var figsBox = [{
@@ -171,12 +172,16 @@
     var usedImgs = {};
     var usedImgsCount = 0;
     var numImg = 0;
-    console.log(numImg);
 
+    /* getRandNum();
+       helper function for DisplayRandImg
+       calculating the random number to use to find the index
+    */ 
     function getRandNum () {
       tempNum = Math.floor(Math.random() * (figsBox.length));
       return tempNum;
     }
+
     /* DisplayRandImg();
        display a random image from the stored figures
     */
@@ -187,15 +192,13 @@
       if (!usedImgs[numImg]) {
         // setting the new image path for curimg
         onChangeImage(figsBox[numImg].src);
-        console.log('the new random image path is: ' + figsBox[numImg].src);
-        console.log('able to change the image path');
+        // console.log('the new random image path is: ' + figsBox[numImg].src);
+        // console.log('able to change the image path');
 
-        // should reset the view of the interface -- calls setup
+        // resetting the view of the monitor and bubbles
         resetBubbleView();
-        console.log('able to reset the bubbleview setup');
-
         resetMonitoring();
-        console.log('able to reset the monitoring as well');
+
         // saying that this image is already used, increase the count
         usedImgs[numImg] = true;
         usedImgsCount++;
@@ -204,10 +207,10 @@
           // if we've run through all of the figures, then reset the things
           usedImgsCount = 0;
           usedImgs = {};
+          onChangeImage(endimg);
           return;
         }
       } else {
-        console.log('broken or has been called again bc repeating');
         // if numImg has been repeated, then we should re-calculate the number and call again
         numImg = getRandNum();
         DisplayRandImg();
@@ -390,11 +393,22 @@
     var canvasHeight;
     var windowWidth, windowHeight;
     var timer = null;
+
+    /* resizeCanvas
+       resizing the canvas size, always trying to make the canvas 750x750
+    */
     function resizeCanvas(canvasID, containerID) {
       var newWidth = $('#' + containerID).width();
-      if (newWidth > 500 && newWidth < 500) {
-        newWidth = 500;
+
+      // console.log('dimensions of the container: ' + newWidth + 'x' + ($('#' + containerID).height()));
+
+      // console.log('is new width bigger than 500?' + (newWidth > 500));
+      if (newWidth > 500 || newWidth < 500) {
+        newWidth = 1000;
       }
+
+      // console.log('the resized width, should be 750: ' + newWidth);
+
       var canvas = document.getElementById(canvasID);
       canvas.width = parseInt(newWidth);
       canvas.height = parseInt(newWidth);

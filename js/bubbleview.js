@@ -13,6 +13,7 @@ var bv = (function() {
   function CalcNewImageSize(imgWidth, imgHeight, canvasWidth, canvasHeight) {
     // calculate the ratio (how much of the canvas is the image taking up)
     var ratio = Math.min(canvasWidth / imgWidth, canvasHeight / imgHeight);
+  
     if (ratio > 1.0) {
       ratio = 1.0;
     }
@@ -61,6 +62,8 @@ var bv = (function() {
     ctx.save();
 
     var rect = canvas.getBoundingClientRect();
+
+    console.log(rect);
 
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
@@ -130,14 +133,16 @@ var bv = (function() {
 
   /* setup
      sets up the background/canvas image
-     inputs: imgUrl (the file path), canvasID (usually canvas-container),
+     inputs: imgUrl (the file path), canvasID (usually canvas),
              bubbleR (the bubble radius), blurR (the blur sigma), task (
              if the user is doing a task)
   */
   function setup(imgUrl, canvasID, bubbleR, blurR, task) {
     userTask = task;
     canvas = document.getElementById(canvasID);
+
     image = new Image();
+
     var bubbleR = parseInt(bubbleR);
     if (isNaN(bubbleR) || bubbleR <= 0) {
       return;
@@ -157,12 +162,12 @@ var bv = (function() {
       var newSize = CalcNewImageSize(this.naturalWidth, this.naturalHeight, canvas.width, canvas.height);
 
       var blurred = blurImage(image, _blurR);
+
+      // console.log('canvas dimensions: ' + canvas.width + 'x' + canvas.height);
+
       ctx.drawImage(blurred, 0, 0, newSize.width, newSize.height);
     }
-    // console.log('the image that we want to shows url: ' + imgUrl);
     image.src = imgUrl;
-    // console.log('the source url of the image-- should be same as above^:' + image.src);
-    // console.log('image source == imgUrl: ' + (image.src == imgUrl));
   }
 
 
@@ -170,6 +175,7 @@ var bv = (function() {
   function monitor(imgUrl, canvasID, bubbleR, blurR, seeBubbles, seeOriginal,
     clicks, maxTime) {
     var canvas = document.getElementById(canvasID); // not using global variable
+
     var image = new Image();
 
     var bubbles = [];
@@ -248,44 +254,14 @@ var bv = (function() {
         prev_y = bubble.cy;
 
       }
-      
-      // // trying to save/ export this as a file
-      // const fs = require('./bubbleview.js');
-      // var file = fs.createWriteStream('./results');
-      // file.on('error', function(err) {
-      //   console.log('bruh howd it break again');
-      // });
-      // arr.forEach(function(v) {
-      //   file.write(v.join(', ') + '\n');
-      //   console.log('this shit kinda fyre');
-      // });
-      // file.end();
-      //   require("fs").writeFile(
-      //     somepath,
-      //     arr.map(function(v){ return v.join(', ') }).join('\n'),
-      //     function (err) {console.log(err ? 'Error :'+err : 'ok')}
-      //  );
-      // console.log(bubbles);
-      // console.log(cy);
-      // export function expArr() {
-      //   return clicks;
-      // }
-
-      // certain # of clicks/fixations then change to another image (export it then)
-      // when click next figure (log current trial)
-
-
+      // outputting the coordinate array
       console.log(clicks);
 
       ctx.restore();
-
     }
 
     image.src = imgUrl;
     return bubbles.length;
-
-
-
   }
   return { // public interface
     setup: setup,
