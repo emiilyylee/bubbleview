@@ -159,10 +159,10 @@ var bv = (function() {
       var blurred = blurImage(image, _blurR);
       ctx.drawImage(blurred, 0, 0, newSize.width, newSize.height);
     }
-    console.log('the image that we want to shows url: ' + imgUrl);
+    // console.log('the image that we want to shows url: ' + imgUrl);
     image.src = imgUrl;
-    console.log('the source url of the image-- should be same as above^:' + image.src);
-    console.log('image source == imgUrl: ' + (image.src == imgUrl));
+    // console.log('the source url of the image-- should be same as above^:' + image.src);
+    // console.log('image source == imgUrl: ' + (image.src == imgUrl));
   }
 
 

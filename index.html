@@ -141,7 +141,7 @@
     var originalDesc, updatedDesc;          /* vars for the original and updated decriptions */
     var slider;                             /* var for the time slider -- keeping track of the order */
     var seeBubbles, seeOriginal;            /* toggle controls to view the original image or bubble map*/
-    var curimg = 'img/AR5figure1.png';      /* default image */
+    var curimg = 'img/startImg.png';        /* default image */
 
     // variable storing the source of the images
     var figsBox = [{
@@ -174,25 +174,28 @@
     console.log(numImg);
 
     function getRandNum () {
-
+      tempNum = Math.floor(Math.random() * (figsBox.length));
+      return tempNum;
     }
     /* DisplayRandImg();
        display a random image from the stored figures
     */
     function DisplayRandImg() {
-      // if the image has not been used yet
+      // randomizing the numbers
+      numImg = getRandNum();
+
       if (!usedImgs[numImg]) {
         // setting the new image path for curimg
-        onChangeImage(figsBox[numImg]);
-        console.log('the new random image path is: ' + figsBox[numImg]);
+        onChangeImage(figsBox[numImg].src);
+        console.log('the new random image path is: ' + figsBox[numImg].src);
         console.log('able to change the image path');
 
-        // should reset the view of the monitor -- calls setup
+        // should reset the view of the interface -- calls setup
         resetBubbleView();
+        console.log('able to reset the bubbleview setup');
 
-        console.log('able to reset the monitoring');
-        console.log(usedImgs[numImg]);
-
+        resetMonitoring();
+        console.log('able to reset the monitoring as well');
         // saying that this image is already used, increase the count
         usedImgs[numImg] = true;
         usedImgsCount++;
@@ -206,10 +209,14 @@
       } else {
         console.log('broken or has been called again bc repeating');
         // if numImg has been repeated, then we should re-calculate the number and call again
-        numImg = Math.floor(Math.random() * (figsBox.length));
+        numImg = getRandNum();
         DisplayRandImg();
       }
     }
+
+    /* 
+    */
+
 
     /* logClick:
        keeps track of the clicks that are made on the canvas, pushes the position 
