@@ -41,9 +41,9 @@
         <!-- creating a canvas that the image will be on, making it 500x500 -->
         <div class="row">
           <!-- ** change the col # to change how much room the canvas takes up -->
-          <div class="col-md-9" style="padding: 10px; float: right;" id="canvas-container">
+          <div class="col-md-9" style="padding: 10px; float: left;" id="canvas-container">
             <!-- makes the canvas for the whole space-- the white part?? -->
-            <canvas id="canvas" width="500" height="500" style = "float: right; margin-right: 100px;"></canvas>
+            <canvas id="canvas" width="500" height="500" style="float: left; margin-left: 0px;"></canvas>
           </div>
 
           <!-- creating a counter for both the clicks and the characters -->
@@ -63,11 +63,15 @@
             </form>
 
             <!-- making the "next" button that takes you to the monitoring interface -->
-            <a class="btn btn-success btn-block" style="margin:0px;" onclick= 'DisplayRandImg();'>
+            <a class="btn btn-success btn-block" style="margin:0px;" onclick='DisplayRandImg();'>
               Next
             </a>
           </div>
         </div>
+        <!-- making an export button -->
+        <button class="btn btn-success btn-block" id="export" onclick='ExportVals()'>
+          Export
+        </button>
       </div>
     </div>
 
@@ -143,29 +147,51 @@
     var seeBubbles, seeOriginal;            /* toggle controls to view the original image or bubble map*/
     var curimg = 'img/startImg.png';        /* default image */
     var endimg = 'img/endImg.png';
+    var matrix;
+    var nameOfFile = 'testRun.csv';
 
     // variable storing the source of the images
     var figsBox = [{
-      src: 'img/AR5figure1.png'}, {
-      src: 'img/AR5figure2.png'}, {
-      src: 'img/AR5figure3.png'}, {
-      src: 'img/AR5figure4.png'}, {
-      src: 'img/AR5figure5.png'}, {
-      src: 'img/AR5figure6.png'}, {
-      src: 'img/AR5figure7.png'}, {
-      src: 'img/AR5figure8.png'}, {
-      src: 'img/AR5figure9.png'}, {
-      src: 'img/AR5figure10.png'}, {
-      src: 'img/AR6figure1.png'}, {
-      src: 'img/AR6figure2.png'}, {
-      src: 'img/AR6figure3.png'}, {
-      src: 'img/AR6figure4.png'}, {
-      src: 'img/AR6figure5.png'}, {
-      src: 'img/AR6figure6.png'}, {
-      src: 'img/AR6figure7.png'}, {
-      src: 'img/AR6figure8.png'}, {
-      src: 'img/AR6figure9.png'}, {
-      src: 'img/AR6figure10.png'}, {
+      src: 'img/AR5figure1.png'
+    }, {
+      src: 'img/AR5figure2.png'
+    }, {
+      src: 'img/AR5figure3.png'
+    }, {
+      src: 'img/AR5figure4.png'
+    }, {
+      src: 'img/AR5figure5.png'
+    }, {
+      src: 'img/AR5figure6.png'
+    }, {
+      src: 'img/AR5figure7.png'
+    }, {
+      src: 'img/AR5figure8.png'
+    }, {
+      src: 'img/AR5figure9.png'
+    }, {
+      src: 'img/AR5figure10.png'
+    }, {
+      src: 'img/AR6figure1.png'
+    }, {
+      src: 'img/AR6figure2.png'
+    }, {
+      src: 'img/AR6figure3.png'
+    }, {
+      src: 'img/AR6figure4.png'
+    }, {
+      src: 'img/AR6figure5.png'
+    }, {
+      src: 'img/AR6figure6.png'
+    }, {
+      src: 'img/AR6figure7.png'
+    }, {
+      src: 'img/AR6figure8.png'
+    }, {
+      src: 'img/AR6figure9.png'
+    }, {
+      src: 'img/AR6figure10.png'
+    }, {
       src: 'img/AR6figure11.png'
     }];
 
@@ -176,8 +202,8 @@
     /* getRandNum();
        helper function for DisplayRandImg
        calculating the random number to use to find the index
-    */ 
-    function getRandNum () {
+    */
+    function getRandNum() {
       tempNum = Math.floor(Math.random() * (figsBox.length));
       return tempNum;
     }
@@ -217,10 +243,6 @@
       }
     }
 
-    /* 
-    */
-
-
     /* logClick:
        keeps track of the clicks that are made on the canvas, pushes the position 
        to the array called "clicks". also calls to the reset monitoring function
@@ -233,7 +255,7 @@
       clicks.push(log);
 
       // console.log(clickCount);
-      // console.log(clicks[0].cx);
+      // console.log("this is the clicks x coordinate at a certain number of clicks: " + clicks[clickCount - 1].cx);
       // console.log(clicks);
 
       resetMonitoring();
@@ -482,25 +504,124 @@
       $('#see-bubbles').change(onCheckSeeBubbles);
 
     })
+
+    /* ExportVals()
+       calls the exportToCSV function to export the values of the table
+    */
+    function ExportVals() {
+      createListOfVals();
+      console.log("this is the matrix as of now: " + matrix);
+      exportToCSV(nameOfFile, matrix);
+    }
+
+
+    /* ExportToCSV:
+       this function should output the coordinates of the clicks on the canvas
+       (cx, cy), which figure it is, and the description of the image. save as csv
+    */
+    function exportToCSV(filename, rows) {
+      var processRow = function (row) {
+        var finalVal = '';
+        for (var j = 0; j < row.length; j++) {
+          var innerValue = row[j] === null ? '' : row[j].toString();
+          if (row[j] instanceof Date) {
+            innerValue = row[j].toLocaleString();
+          };
+          var result = innerValue.replace(/"/g, '""');
+          if (result.search(/("|,|\n)/g) >= 0)
+            result = '"' + result + '"';
+          if (j > 0)
+            finalVal += ',';
+          finalVal += result;
+        }
+        return finalVal + '\n';
+      };
+
+      var csvFile = '';
+      for (var i = 0; i < rows.length; i++) {
+        csvFile += processRow(rows[i]);
+      }
+
+      var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+      if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, filename);
+      }
+      else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+          // Browsers that support HTML5 download attribute
+          var url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", filename);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    }
+
+
+
+    function createListOfVals() {
+      var csvData = [];
+
+      // writing a for loop so that it will go through all of clicks to get the cx, cy, radius, and blur
+      // getting the data per click-- push them all to the same array
+      for (var i = 0; i < clickCount; i++) {
+        // console.log("this is the x coordinate on the canvas: " + clicks[i].cx);
+        csvData.push(clicks[i].cx);
+        // console.log("this is the y coordinate on the canvas: " + clicks[i].cy);
+        csvData.push(clicks[i].cy);
+        // console.log("this is the radius: " + clicks[i].radius);
+        csvData.push(clicks[i].radius);
+        // console.log("this is the blur: " + clicks[i].blur);
+        csvData.push(clicks[i].blur);
+        // console.log("the current image: " + curimg);
+        csvData.push(curimg);
+      }
+
+      // the number of things adding to the matrix (cx, cy, etc..)
+      var rows = 5;
+      // converting the 1D array into a matrix
+      matrix = listToMatrix(csvData, rows);
+      return matrix;
+    }
+
+    /* listToMatrix();
+       helper function for ExportVals, this will change the 1D array to a 2D array
+    */
+    function listToMatrix(list, elPerSubArr) {
+      var mat = [], i, k;
+
+      for (i = 0, k = -1; i < list.length; i++) {
+        if (i % elPerSubArr === 0) {
+          k++;
+          mat[k] = [];
+        }
+        mat[k].push(list[i]);
+      }
+      return mat;
+    }
   </script>
 
   <script>
 
-      /**
-      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-      /*
-      var disqus_config = function () {
-      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-      */
-      (function () { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//bubbleview.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-      })();
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function () { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = '//bubbleview.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   </script>
 
 </body>

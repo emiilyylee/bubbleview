@@ -63,8 +63,6 @@ var bv = (function() {
 
     var rect = canvas.getBoundingClientRect();
 
-    console.log(rect);
-
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
 
@@ -255,7 +253,7 @@ var bv = (function() {
 
       }
       // outputting the coordinate array
-      console.log(clicks);
+      // console.log(clicks);
 
       ctx.restore();
     }
