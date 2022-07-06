@@ -121,6 +121,9 @@ var bv = (function() {
 
     if (isNaN(radius) || radius < 1) return;
 
+    // console.log(img.src);
+    if (img.src.includes("img/endImg.png") || img.src.includes("img/startImg.png")) return temp;
+
     if (blurAlphaChannel)
         StackBlur.canvasRGBA(temp, 0, 0, w, h, radius);
     else

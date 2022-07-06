@@ -187,34 +187,50 @@
     */
     function DisplayRandImg() {
       // randomizing the numbers
-      numImg = getRandNum();
-
-      if (!usedImgs[numImg]) {
-        // setting the new image path for curimg
-        onChangeImage(figsBox[numImg].src);
-        // console.log('the new random image path is: ' + figsBox[numImg].src);
-        // console.log('able to change the image path');
-
-        // resetting the view of the monitor and bubbles
-        resetBubbleView();
-        resetMonitoring();
-
-        // saying that this image is already used, increase the count
-        usedImgs[numImg] = true;
-        usedImgsCount++;
-
-        if (usedImgsCount == figsBox.length) {
-          // if we've run through all of the figures, then reset the things
-          usedImgsCount = 0;
-          usedImgs = {};
-          onChangeImage(endimg);
-          return;
-        }
-      } else {
-        // if numImg has been repeated, then we should re-calculate the number and call again
+      var usedNums = [];
+      var numOfImgs = figsBox.length;
+      while (usedNums.length < numOfImgs) {
         numImg = getRandNum();
-        DisplayRandImg();
+
+        // if the index isnt in our list
+        if (usedNums.indexOf(numImg) == -1) {
+          usedNums.push(numImg);
+        }
       }
+      for (i = 0; i < usedNums.length; i++) {
+        onChangeImage(figsBox[numImg].src);
+
+      }
+      DisplayRandImg();
+      
+      // console.log(usedNums.includes(numImg));
+      // if (!usedNums.includes(numImg)) {
+      //   // adding this number to the array
+      //   usedNums.push(numImg);
+        
+      //   console.log(usedNums.push(numImg));
+      //   onChangeImage(figsBox[numImg].src);
+      //   // console.log('the new random image path is: ' + figsBox[numImg].src);
+      //   // console.log('able to change the image path');
+
+      //   // resetting the view of the monitor and bubbles
+      //   resetBubbleView();
+      //   // resetMonitoring();
+
+      //   // saying that this image is already used, increase the count
+        
+
+      //   console.log(usedNums.length);
+      //   console.log(figsBox.length);
+      //   if (usedNums.length == figsBox.length) {
+      //     // if we've run through all of the figures, then reset the things
+      //     onChangeImage(endimg);
+      //   }
+      // } else {
+      //   // if numImg has been repeated, then we should re-calculate the number and call again
+      //   numImg = getRandNum();
+      //   DisplayRandImg();
+      // }
     }
 
     /* logClick:
@@ -232,7 +248,7 @@
       // console.log("this is the clicks x coordinate at a certain number of clicks: " + clicks[clickCount - 1].cx);
       // console.log(clicks);
 
-      resetMonitoring();
+      // resetMonitoring();
     }
 
     /* focusInDesc:
@@ -259,34 +275,34 @@
         timestamp: $.now()
       });
 
-      resetMonitoring();
+      // resetMonitoring();
     }
 
     /* onSliderChange:
        calls to updateMonitoring which should change the slider
        inputs: value and handle
     */
-    function onSliderChange(value, handle) {
-      updateMonitoring();
-    }
+    // function onSliderChange(value, handle) {
+    //   updateMonitoring();
+    // }
 
     /* onCheckSeeBubbles:
        "checks" the toggle that says that we want to see the bubbles and then 
        calls on updateMonitoring.
     */
-    function onCheckSeeBubbles() {
-      seeBubbles = this.checked;
-      updateMonitoring();
-    }
+    // function onCheckSeeBubbles() {
+    //   seeBubbles = this.checked;
+    //   updateMonitoring();
+    // }
 
     /* onCheckSeeOriginal:
        "checks" the toggle that says that we want to see the original (unblurred image)
        and then calls on updateMonitoring.
     */
-    function onCheckSeeOriginal() {
-      seeOriginal = this.checked;
-      updateMonitoring();
-    }
+    // function onCheckSeeOriginal() {
+    //   seeOriginal = this.checked;
+    //   updateMonitoring();
+    // }
 
     /* onChangeImage:
        changes the image by replacing the old curimg with the imgPath
@@ -310,7 +326,7 @@
       clicks = [];
       descs = [];
       clickCount = 0;
-      resetMonitoring();
+      // resetMonitoring();
     }
 
     /* updateMonitoring:
