@@ -83,46 +83,7 @@
     </div>
   </div>
 
-  <div id="monitoring" class="panel panel-success" style="margin-top:100px;">
-    <div class="panel-heading">
-      <h3 class="panel-title">Monitoring Interface</h3>
-    </div>
-    <div class="panel-body">
-      <div class="row">
 
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-          <div class="togglebutton">
-            <label>
-              <input id="see-original" type="checkbox"> See Original
-            </label>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-          <div class="togglebutton">
-            <label>
-              <input id="see-bubbles" type="checkbox" checked> See Bubbles
-            </label>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-          <label> Time Slider (<span id="curr-bubbles">0</span>/<span id="total-bubbles">0</span>)</label>
-          <div id="slider" style="margin-top:0px;" class="slider shor slider-material-orange"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-9" id="result-canvas-container">
-          <canvas id="result-canvas" width="500" height="500"></canvas>
-        </div>
-        <div class="col-md-3">
-          <label>Description Change:</label>
-          <p id="result-desc">
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   </div>
   </div>
@@ -355,74 +316,74 @@
     /* updateMonitoring:
        updates the view of the monitoring interface
     */
-    function updateMonitoring() {
-      // console.log('update monitoring')
+    // function updateMonitoring() {
+    //   // console.log('update monitoring')
 
-      // update bubbles
-      var filteredCnt = bv.monitor(curimg, 'result-canvas', radius, blur,
-        seeBubbles, seeOriginal, clicks, parseInt($('#slider').val()));
+    //   // update bubbles
+    //   var filteredCnt = bv.monitor(curimg, 'result-canvas', radius, blur,
+    //     seeBubbles, seeOriginal, clicks, parseInt($('#slider').val()));
 
-      // update description
-      var maxTime = parseInt($('#slider').val())
-      var desc = null; // $scope.desc;
+    //   // update description
+    //   var maxTime = parseInt($('#slider').val())
+    //   var desc = null; // $scope.desc;
 
-      for (var i = 0; i < descs.length; i++) {
-        var time = parseInt(descs[i].timestamp);
-        if (time <= maxTime) { // find the last description
-          desc = descs[i]
-        }
-      }
-      $('#result-desc').empty();
-      if (desc != null) {
-        desc['diff'].forEach(function (part) {
-          // green for additions, red for deletions
-          // grey for common parts
-          var color = part.added ? 'green' :
-            part.removed ? 'red' : 'grey';
+    //   for (var i = 0; i < descs.length; i++) {
+    //     var time = parseInt(descs[i].timestamp);
+    //     if (time <= maxTime) { // find the last description
+    //       desc = descs[i]
+    //     }
+    //   }
+    //   $('#result-desc').empty();
+    //   if (desc != null) {
+    //     desc['diff'].forEach(function (part) {
+    //       // green for additions, red for deletions
+    //       // grey for common parts
+    //       var color = part.added ? 'green' :
+    //         part.removed ? 'red' : 'grey';
 
-          var span = $("<span>" + part.value + "</span>");
-          span.css("color", color);
-          span.appendTo("#result-desc");
+    //       var span = $("<span>" + part.value + "</span>");
+    //       span.css("color", color);
+    //       span.appendTo("#result-desc");
 
-        });
-      }
-      $("#curr-bubbles").text(filteredCnt);
-      $("#total-bubbles").text(clickCount);
-    }
+    //     });
+    //   }
+    //   $("#curr-bubbles").text(filteredCnt);
+    //   $("#total-bubbles").text(clickCount);
+    // }
 
     /* resetMonitoring:
        resets the monitoring interface
     */
-    function resetMonitoring(maxTime) {
-      //  reset monitoring interface
-      //  reset slider
-      if (clicks.length <= 0 && descs.length <= 0) {
-        slider = $("#slider").noUiSlider({
-          start: 0,
-          connect: "lower",
-          range: {
-            min: 0,
-            max: 0
-          }
-        }, true);
-      } else {
-        var times = clicks.concat(descs).sort(function (a, b) {
-          return a.timestamp - b.timestamp;
-        }).map(function (d) {
-          return d.timestamp;
-        });
+    // function resetMonitoring(maxTime) {
+    //   //  reset monitoring interface
+    //   //  reset slider
+    //   if (clicks.length <= 0 && descs.length <= 0) {
+    //     slider = $("#slider").noUiSlider({
+    //       start: 0,
+    //       connect: "lower",
+    //       range: {
+    //         min: 0,
+    //         max: 0
+    //       }
+    //     }, true);
+    //   } else {
+    //     var times = clicks.concat(descs).sort(function (a, b) {
+    //       return a.timestamp - b.timestamp;
+    //     }).map(function (d) {
+    //       return d.timestamp;
+    //     });
 
-        $("#slider").noUiSlider({
-          start: times[times.length - 1],
-          connect: "lower",
-          range: {
-            min: times[0] - 1,
-            max: times[times.length - 1]
-          }
-        }, true);
-      }
-      updateMonitoring();
-    }
+    //     $("#slider").noUiSlider({
+    //       start: times[times.length - 1],
+    //       connect: "lower",
+    //       range: {
+    //         min: times[0] - 1,
+    //         max: times[times.length - 1]
+    //       }
+    //     }, true);
+    //   }
+    //   updateMonitoring();
+    // }
     // responsive canvas
     var size = {};
     var canvasWidth;
@@ -453,7 +414,7 @@
 
     function resized() {
       resizeCanvas('canvas', 'canvas-container');
-      resizeCanvas('result-canvas', 'result-canvas-container');
+      // resizeCanvas('result-canvas', 'result-canvas-container');
       resetBubbleView();
     }
 
@@ -468,7 +429,7 @@
       $('[data-toggle="popover"]').popover();
 
       resizeCanvas('canvas', 'canvas-container');
-      resizeCanvas('result-canvas', 'result-canvas-container');
+      // resizeCanvas('result-canvas', 'result-canvas-container');
 
       // bubbleview interface setup
       radius = $("input[name='radius']:checked").val();
@@ -477,14 +438,14 @@
       seeBubbles = $("#see-bubbles").prop("checked");
       seeOriginal = $("#see-original").prop("checked");
       // console.log(seeBubbles + ", " + seeOriginal);
-      $("#slider").noUiSlider({
-        start: 0,
-        connect: "lower",
-        range: {
-          min: 0,
-          max: 0
-        }
-      });
+      // $("#slider").noUiSlider({
+      //   start: 0,
+      //   connect: "lower",
+      //   range: {
+      //     min: 0,
+      //     max: 0
+      //   }
+      // });
       resetBubbleView();
 
 
