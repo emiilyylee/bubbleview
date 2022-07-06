@@ -180,7 +180,7 @@ var bv = (function() {
     if (clicks && clicks.length>0){
       // filter bubbles by the time span
       clicks = clicks.slice();
-      clicks.sort(function(a, b) { //sort time by descending
+      clicks.sort(function(a, b) { // sort time by descending
         return a.timestamp - b.timestamp;
       });
       for (var i = 0; i < clicks.length; i++) {

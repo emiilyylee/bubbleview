@@ -45,83 +45,84 @@
             <!-- makes the canvas for the whole space-- the white part?? -->
             <canvas id="canvas" width="500" height="500" style="float: left; margin-left: 0px;"></canvas>
           </div>
-
+        </div>
+        <div class="row">
           <!-- creating a counter for both the clicks and the characters -->
-          <div class="col-md-3">
+          <div style="padding: 10px;">
             <form>
               <span class="badge"><span id="click-count">0</span> clicks</span>
-              <span class="badge"><span id="char-count">0</span> characters</span>
+              <!-- <span class="badge"><span id="char-count">0</span> characters</span> -->
 
               <!-- creating and formatting the description box on the right-- want the margin on the right to be as small as possible
-                  ** should we keep this description box?? ** -->
+                ** should we keep this description box?? ** -->
               <div class="form-group label-floating" style="padding: 0px;">
-                <label for="desc" class="control-label">Describe the image in as much detail as possible...</label>
+                <label for="desc" class="control-label">Answer questions then click "Submit"...</label>
 
                 <!-- the format for the textbox itself -->
-                <textarea id="desc" name="desc" class="form-control" rows="20"></textarea>
+                <textarea id= "desc" name="desc" class="form-control" rows="15"></textarea>
               </div>
-            </form>
-
-            <!-- making the "next" button that takes you to the monitoring interface -->
+          </div>
+          </form>
+          <div class="col-md-6">
+            <a class="btn btn-success btn-block" style="margin: 0px;" onclick='focusInDesc();'>
+              Submit
+            </a>
+          </div>
+          <!-- making the "next" button that takes you to the monitoring interface -->
+          <div class="col-md-6">
             <a class="btn btn-success btn-block" style="margin:0px;" onclick='DisplayRandImg();'>
               Next
             </a>
           </div>
         </div>
-        <!-- making an export button -->
-        <button class="btn btn-success btn-block" id="export" onclick='ExportVals()'>
-          Export
-        </button>
       </div>
+      <!-- making an export button -->
+      <button class="btn btn-success btn-block" id="export" onclick='ExportVals()'>
+        Export
+      </button>
     </div>
+  </div>
 
-    <!-- the monitoring interface -->
-    <div id="monitoring" class="panel panel-success" style="margin-top:100px;">
-      <div class="panel-heading">
-        <h3 class="panel-title">Monitoring Interface</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
+  <div id="monitoring" class="panel panel-success" style="margin-top:100px;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Monitoring Interface</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
 
-          <!-- creating the toggle button to see the original image -->
-          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-            <div class="togglebutton">
-              <label>
-                <input id="see-original" type="checkbox"> See Original
-              </label>
-            </div>
-          </div>
-
-          <!-- creating the toggle button to see the bubbles -->
-          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
-            <div class="togglebutton">
-              <label>
-                <input id="see-bubbles" type="checkbox" checked> See Bubbles
-              </label>
-            </div>
-          </div>
-
-          <!-- creating a slider for the time series -->
-          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <label> Time Slider (<span id="curr-bubbles">0</span>/<span id="total-bubbles">0</span>)</label>
-            <div id="slider" style="margin-top:0px;" class="slider shor slider-material-orange"></div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+          <div class="togglebutton">
+            <label>
+              <input id="see-original" type="checkbox"> See Original
+            </label>
           </div>
         </div>
-        <div class="row">
-          <!-- making the coordinate map for the bubbles -->
-          <div class="col-md-9" id="result-canvas-container">
-            <canvas id="result-canvas" width="500" height="500"></canvas>
-          </div>
 
-          <!-- showing the change in the description -->
-          <div class="col-md-3">
-            <label>Description Change:</label>
-            <p id="result-desc">
-            </p>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+          <div class="togglebutton">
+            <label>
+              <input id="see-bubbles" type="checkbox" checked> See Bubbles
+            </label>
           </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+          <label> Time Slider (<span id="curr-bubbles">0</span>/<span id="total-bubbles">0</span>)</label>
+          <div id="slider" style="margin-top:0px;" class="slider shor slider-material-orange"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9" id="result-canvas-container">
+          <canvas id="result-canvas" width="500" height="500"></canvas>
+        </div>
+        <div class="col-md-3">
+          <label>Description Change:</label>
+          <p id="result-desc">
+          </p>
         </div>
       </div>
     </div>
+  </div>
 
   </div>
   </div>
@@ -148,7 +149,19 @@
     var curimg = 'img/startImg.png';        /* default image */
     var endimg = 'img/endImg.png';
     var matrix;
-    var nameOfFile = 'testRun.csv';
+    var nameOfFile = 'shanePrelim.csv';
+
+
+
+    // /* pushDescs();
+    //    should push the descriptions to a originalDesc,
+    // */
+    // function pushDescs() {
+    //   var input = document.$("#descriptor").val();
+    //   originalDesc = input;
+    //   console.log(originalDesc);
+    //   console.log("this is what its supposed to be: " + input);
+    // }
 
     // variable storing the source of the images
     var figsBox = [{
@@ -268,6 +281,7 @@
     function focusInDesc() {
       // console.log("in focus");
       originalDesc = $("#desc").val();
+      // console.log(originalDesc);
     }
 
     /* focusOutDesc:
@@ -510,10 +524,9 @@
     */
     function ExportVals() {
       createListOfVals();
-      console.log("this is the matrix as of now: " + matrix);
+      // console.log("this is the matrix as of now: " + matrix);
       exportToCSV(nameOfFile, matrix);
     }
-
 
     /* ExportToCSV:
        this function should output the coordinates of the clicks on the canvas
@@ -567,6 +580,7 @@
     */
     function createListOfVals() {
       var csvData = [];
+      var descsData = [];
 
       // writing a for loop so that it will go through all of clicks to get the cx, cy, radius, and blur
       // getting the data per click-- push them all to the same array
@@ -581,8 +595,11 @@
         csvData.push(clicks[i].blur);
         // console.log("the current image: " + curimg);
         csvData.push(curimg);
+        // console.log("the descriptions" + descs);
       }
-
+      descsData.push(originalDesc);
+      var tempDescs = descsData.join(' ');
+      csvData.push(tempDescs);
       // the number of things adding to the matrix (cx, cy, etc..)
       var rows = 5;
       // converting the 1D array into a matrix
