@@ -56,30 +56,20 @@
               <!-- creating and formatting the description box on the right-- want the margin on the right to be as small as possible
                 ** should we keep this description box?? ** -->
               <div class="form-group label-floating" style="padding: 0px;">
-                <label for="desc" class="control-label">Answer questions then click "Submit"...</label>
+                <label for="desc" class="control-label">Answer questions then click "Next"...</label>
 
                 <!-- the format for the textbox itself -->
-                <textarea id= "desc" name="desc" class="form-control" rows="15"></textarea>
+                <textarea id="desc" name="desc" class="form-control" rows="15"></textarea>
               </div>
           </div>
           </form>
-          <div class="col-md-6">
-            <a class="btn btn-success btn-block" style="margin: 0px;" onclick='focusInDesc();'>
-              Submit
-            </a>
-          </div>
-          <!-- making the "next" button that takes you to the monitoring interface -->
-          <div class="col-md-6">
-            <a class="btn btn-success btn-block" style="margin:0px;" onclick='DisplayRandImg();'>
+          <div class="row">
+            <a class="btn btn-success btn-block" style="margin: 0px;" onclick='focusInDesc();ExportVals();DisplayRandImg();'>
               Next
             </a>
           </div>
         </div>
       </div>
-      <!-- making an export button -->
-      <button class="btn btn-success btn-block" id="export" onclick='ExportVals()'>
-        Export
-      </button>
     </div>
   </div>
 
@@ -182,32 +172,87 @@
       return tempNum;
     }
 
+
+    // /* old version of the randomizer, use for now before you fix the bug
+    // */
+    // function DisplayRandImg() {
+    //   // randomizing the numbers
+    //   numImg = getRandNum();
+    //   if (!usedImgs[numImg]) {
+    //     // setting the new image path for curimg
+    //     onChangeImage(figsBox[numImg].src);
+    //     // console.log('the new random image path is: ' + figsBox[numImg].src);
+    //     // console.log('able to change the image path');
+    //     // resetting the view of the monitor and bubbles
+    //     resetBubbleView();
+    //     resetMonitoring();
+    //     // saying that this image is already used, increase the count
+    //     usedImgs[numImg] = true;
+    //     usedImgsCount++;
+    //     if (usedImgsCount == figsBox.length) {
+    //       // if we've run through all of the figures, then reset the things
+    //       usedImgsCount = 0;
+    //       usedImgs = {};
+    //       onChangeImage(endimg);
+    //       return;
+    //     }
+    //   } else {
+    //     // if numImg has been repeated, then we should re-calculate the number and call again
+    //     numImg = getRandNum();
+    //     DisplayRandImg();
+    //   }
+    // }
+
     /* DisplayRandImg();
        display a random image from the stored figures
     */
+    var usedNums = [];
+    var numImg;
     function DisplayRandImg() {
-      // randomizing the numbers
-      var usedNums = [];
-      var numOfImgs = figsBox.length;
-      while (usedNums.length < numOfImgs) {
+      // console.log("usedNums length: " + usedNums.length);
+      // console.log("figsBox length: " + figsBox.length);
+      if (usedNums.length < figsBox.length) {
+        // get a random index
         numImg = getRandNum();
-
-        // if the index isnt in our list
-        if (usedNums.indexOf(numImg) == -1) {
+        // if the number is not already in the array,
+        if (!usedNums.includes(numImg)) {
+          // push the value/ the index number into it being "used"
           usedNums.push(numImg);
+          // then we can change the image
+          onChangeImage(figsBox[numImg].src);
+        }
+        // if the usedNums includes the image and we havent been through all
+        // of the images, then we get a new random number
+        else {
+          DisplayRandImg();
         }
       }
-      for (i = 0; i < usedNums.length; i++) {
-        onChangeImage(figsBox[numImg].src);
-
+      else {
+        // console.log("is the number of used == to number of the figure box: " + (usedNums.length==figsBox.length));
+        // console.log("we're done with the figure box");
+        onChangeImage(endimg);
       }
-      DisplayRandImg();
-      
+
+
+
+
+      // while (usedNums.length < figsBox.length) {
+      //   // if the index isnt in our list
+      //   if (usedNums.indexOf(numImg) == -1) {
+      //     usedNums.push(numImg);
+      //   }
+      // }
+      // for (i = 0; i < usedNums.length; i++) {
+      //   onChangeImage(figsBox[numImg].src);
+
+      // }
+      // DisplayRandImg();
+
       // console.log(usedNums.includes(numImg));
       // if (!usedNums.includes(numImg)) {
       //   // adding this number to the array
       //   usedNums.push(numImg);
-        
+
       //   console.log(usedNums.push(numImg));
       //   onChangeImage(figsBox[numImg].src);
       //   // console.log('the new random image path is: ' + figsBox[numImg].src);
@@ -218,7 +263,7 @@
       //   // resetMonitoring();
 
       //   // saying that this image is already used, increase the count
-        
+
 
       //   console.log(usedNums.length);
       //   console.log(figsBox.length);
@@ -233,6 +278,7 @@
       // }
     }
 
+    //
     /* logClick:
        keeps track of the clicks that are made on the canvas, pushes the position 
        to the array called "clicks". also calls to the reset monitoring function
