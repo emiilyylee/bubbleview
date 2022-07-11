@@ -25,18 +25,6 @@
     <div class="panel panel-info">
       <div class="panel-body">
         <!-- panel creation for radio buttons for blur kernel and bubble radius -->
-        <div class="row">
-          <div class="col-md-10">
-            <form name='radiusForm'></form>
-            <label class="radio-inline">
-              <!-- statically setting the radius of the bubble (40 pix) and the blur kernel (45 pix)-->
-              <br></br>
-              <input type="radio" name="blur" value="40" checked>
-              <input type="radio" name="radius" value="45" checked>
-            </label>
-            </form>
-          </div>
-        </div>
 
         <!-- creating a canvas that the image will be on, making it 500x500 -->
         <div class="row">
@@ -64,7 +52,8 @@
           </div>
           </form>
           <div class="row">
-            <a class="btn btn-success btn-block" style="margin: 0px;" onclick='focusInDesc();ExportVals();DisplayRandImg();'>
+            <a class="btn btn-success btn-block" style="margin: 0px;"
+              onclick='focusInDesc();ExportVals();DisplayRandImg();'>
               Next
             </a>
           </div>
@@ -90,7 +79,8 @@
   <script src="js/bubbleview.js"></script>
 
   <script>
-    var radius, blur;                       /* variables to hold the radius size and the blur kernel*/
+    var radius = 45;                       /* variables to hold the radius size and the blur kernel*/
+    var blur = 40;
     var clickCount = 0;                     /* keeping count of the number of clicks on the canvas */
     var clicks = [];                        /* keeping track of the positions (?) of the clicks -- coordinates (?) */
     var descs = [];                         /* keeping track of the descriptions -- storing them in a list/arr */
@@ -100,7 +90,7 @@
     var curimg = 'img/startImg.png';        /* default image */
     var endimg = 'img/endImg.png';
     var matrix;
-    var nameOfFile = 'shanePrelim.csv';
+    var nameOfFile = 'prelimData.csv';
 
 
 
@@ -462,7 +452,7 @@
       // console.log('dimensions of the container: ' + newWidth + 'x' + ($('#' + containerID).height()));
 
       // console.log('is new width bigger than 500?' + (newWidth > 500));
-      if (newWidth > 500 || newWidth < 500) {
+      if (newWidth > 1000 || newWidth < 1000) {
         newWidth = 1000;
       }
 
@@ -494,8 +484,8 @@
       // resizeCanvas('result-canvas', 'result-canvas-container');
 
       // bubbleview interface setup
-      radius = $("input[name='radius']:checked").val();
-      blur = $("input[name='blur']:checked").val();
+      radius = 45;
+      blur = 40;
 
       seeBubbles = $("#see-bubbles").prop("checked");
       seeOriginal = $("#see-original").prop("checked");
