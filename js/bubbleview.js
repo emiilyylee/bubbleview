@@ -269,8 +269,3 @@ var bv = (function() {
     monitor: monitor
   };
 })();
-
-// take out the figures button
-// when you hit the next button it randomizes the figures and picks another one
-// next button is faded out until you finish some # of clicks/fixations
-// can export as csv as json-- visualizing (see if you can plot the coordinates-- see if they match where the monitor says the same (could be screen coords use like opencv))

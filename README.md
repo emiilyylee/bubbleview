@@ -29,3 +29,5 @@ The `bubbleview.js` exports two functions `setup(...)` and `monitor(...)` whose 
 
 `clicks` is an optional list of bubbles generated based on user clicks. `monitor()` expects its format to be the same as the one passed to the user callback; that is, an item in the list should have `cx`, `cy` and `timestamp`. `maxTime` is an optional timestamp limiting the number of bubbles drawn on the canvas (see the time slider in the demo). `monitor()` returns the total number of bubbles drawn given the `maxTime` option.
 
+## Post-fork description:
+I simplified the interface so that it only includes the testing interface, commented out the monitoring interface, but its still available to use. Added in a randomizer into the next button so that when you click it it will show a random image (without repeats) and export the click and description data as a csv file. If at the end of the figure library, then it will show the ending image. Also changed the canvas size to be bigger and made the blur kernel and circle radius to be a static value (in bubbleview.js).
