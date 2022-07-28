@@ -31,3 +31,6 @@ The `bubbleview.js` exports two functions `setup(...)` and `monitor(...)` whose 
 
 ## Post-fork description:
 I simplified the interface so that it only includes the testing interface, commented out the monitoring interface, but its still available to use. Added in a randomizer into the next button so that when you click it it will show a random image (without repeats) and export the click and description data as a csv file. If at the end of the figure library, then it will show the ending image. Also changed the canvas size to be bigger and made the blur kernel and circle radius to be a static value (in bubbleview.js).
+
+## In order to run:
+To run the bubbleview interface, I ran it on vscode and installed the extension called "Live Server". From this, go to the index.html file, right click the line that says "<head>" and click "run on Live Server".
